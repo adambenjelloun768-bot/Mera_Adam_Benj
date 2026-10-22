@@ -1,6 +1,5 @@
 const BACKENDS = [
-  'https://mon-backend.vercel.app',   // principal
-  'https://mon-backend.workers.dev',  // secours
+rqnc  // secours
 ];
 
 const TIMEOUT_MS = 5000;
