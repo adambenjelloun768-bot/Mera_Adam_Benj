@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6f8">
+  <title>Atelier — Articles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigation principale">
+      <a class="brand" href="#accueil" aria-label="Atelier, accueil">
+        <span class="brand-mark">a<span>.</span></span>
+        <span class="brand-name">atelier</span>
+      </a>
+      <div class="workspace-label">ESPACE DE TRAVAIL</div>
+      <nav class="nav-list">
+        <a class="nav-link" href="#accueil"><span class="nav-icon">⌂</span>Vue d’ensemble</a>
+        <a class="nav-link active" href="#articles" aria-current="page"><span class="nav-icon">▦</span>Articles<span class="nav-count" id="nav-count">0</span></a>
+        <a class="nav-link" href="#commandes"><span class="nav-icon">▤</span>Commandes</a>
+        <a class="nav-link" href="#clients"><span class="nav-icon">♙</span>Clients</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-spark">✳</span><strong>Besoin d’un coup de main ?</strong><p>Consultez notre guide pour bien démarrer.</p><a href="mailto:bonjour@atelier.fr">Voir le guide <span>↗</span></a></div>
+        <button class="profile" type="button" aria-label="Profil de Adam Benjelloun">
+          <span class="avatar">AB</span><span class="profile-info"><strong>Adam Benjelloun</strong><small>Administrateur</small></span><span class="profile-more">···</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="articles">
+      <header class="topbar"><div class="breadcrumbs">Espace de travail <span>/</span> <strong>Articles</strong></div><div class="topbar-actions"><span class="today" id="today-label"></span><button class="icon-button" type="button" aria-label="Notifications">♧<i></i></button></div></header>
+      <section class="page-heading">
+        <div><div class="eyebrow"><span class="eyebrow-dot"></span> VOTRE BOUTIQUE</div><h1>Articles</h1><p class="subtitle">Gérez votre catalogue et gardez un œil sur vos prix.</p></div>
+        <button class="primary-button" id="open-form" type="button"><span>＋</span> Ajouter un article</button>
+      </section>
+
+      <section class="stats-grid" aria-label="Résumé du catalogue">
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Articles au catalogue</span><span class="stat-icon lilac">▦</span></div><div class="stat-value" id="stat-items">—</div><div class="stat-note">articles enregistrés</div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Valeur du catalogue</span><span class="stat-icon mint">◈</span></div><div class="stat-value" id="stat-value">—</div><div class="stat-note">somme des prix affichés</div></article>
+        <article class="stat-card"><div class="stat-top"><span class="stat-label">Prix moyen</span><span class="stat-icon peach">⌁</span></div><div class="stat-value" id="stat-average">—</div><div class="stat-note">par article</div></article>
+      </section>
+
+      <section class="catalog-card">
+        <div class="catalog-heading"><div><h2>Votre catalogue</h2><p>Retrouvez ici tous les articles de votre boutique.</p></div><span class="live-badge"><i></i> Catalogue actif</span></div>
+        <div class="toolbar"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Rechercher un article…" aria-label="Rechercher un article"></label><label class="sort-box"><span>Trier par</span><select id="sort-select" aria-label="Trier les articles"><option value="recent">Plus récents</option><option value="name">Nom (A à Z)</option><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option></select></label></div>
+        <div class="table-wrap"><table><thead><tr><th>ARTICLE</th><th>PRIX</th><th>RÉFÉRENCE</th><th><span class="sr-only">État</span></th></tr></thead><tbody id="items-list"></tbody></table>
+          <div class="empty-state" id="empty-state" hidden><span class="empty-icon">▦</span><strong id="empty-title">Votre catalogue est vide</strong><p id="empty-description">Ajoutez votre premier article pour commencer.</p><button class="text-button" id="empty-add" type="button">＋ Ajouter un article</button></div>
+          <div class="loading-state" id="loading-state"><span class="spinner"></span> Chargement du catalogue…</div>
+        </div>
+        <footer class="table-footer"><span id="results-label">Chargement des articles…</span><span class="footer-note"><span class="footer-check">✓</span> Synchronisé avec votre espace</span></footer>
+      </section>
+      <p class="page-footnote">Une question sur votre catalogue ? <a href="mailto:bonjour@atelier.fr">Contactez notre équipe</a></p>
+    </main>
+  </div>
+
+  <dialog class="item-dialog" id="item-dialog" aria-labelledby="dialog-title">
+    <form id="item-form" novalidate>
+      <div class="dialog-top"><div><div class="eyebrow"><span class="eyebrow-dot"></span> CATALOGUE</div><h2 id="dialog-title">Ajouter un article</h2><p>Renseignez les informations de votre nouvel article.</p></div><button class="close-button" id="close-form" type="button" aria-label="Fermer">×</button></div>
+      <label class="field-label" for="item-name">Nom de l’article</label><input class="form-input" id="item-name" name="name" maxlength="100" placeholder="Ex. Bougie parfumée" required>
+      <label class="field-label" for="item-price">Prix <span>(MAD)</span></label><div class="price-input"><input class="form-input" id="item-price" name="price" type="number" min="0.01" step="0.01" placeholder="0,00" required><span>MAD</span></div>
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="secondary-button" id="cancel-form" type="button">Annuler</button><button class="primary-button" id="submit-button" type="submit">Ajouter l’article <span>→</span></button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
